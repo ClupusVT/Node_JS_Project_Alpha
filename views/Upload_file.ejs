@@ -1,0 +1,77 @@
+<!-- views/Upload_file.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <!-- Include any additional styling or scripts if needed -->
+</head>
+<body>
+    <h2>File Upload</h2>
+
+    <!-- File Upload Form -->
+    <script src="/js/upload_validate.js"></script>
+    <form id="upload-form" action="/vuln/Upload_file/upload" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <!-- Input field for file selection -->
+        <label for="file">Choose a file :</label>
+        <input type="file" id="file" name="file" accept=".txt, .pdf, .doc, .docx" onchange="validateFile()">
+
+        <!-- Display error message for invalid file type -->
+        <p id="file-error"></p>
+
+        <!-- Submit button to upload the file -->
+        <label>Validate Upload File on Client Side :</label>
+        <button type="submit">Submit </button>
+        <h3>--------------------</h3>
+    </form>
+    <!-- Display uploaded file details (for demonstration purposes) -->
+       <% if (uploadedFile) { %>
+        <h3>Uploaded File Details:</h3>
+        <p>File Name: <%= uploadedFile.originalname %></p>
+        <p>File Size: <%= uploadedFile.size %> bytes</p>
+        <!-- Add more details if needed -->
+    <% } %>  
+
+
+    <form action="/vuln/Upload_file/list" method="get">
+        <!-- Add hidden input field for username -->
+        <label for=>List uploaded file</label>
+        <button type="submit">List</button>
+    </form>
+
+    <!-- Display filenames (for demonstration purposes) -->
+    <% if (uploadedFiles) { %>    
+        <% if (uploadedFiles && uploadedFiles.length > 0) { %>
+            <h3>Uploaded File List:</h3>
+            <% uploadedFiles.forEach(function(fileName) { %>
+                <p><%= fileName %></p>
+            <% }); %>
+        <% } %>
+    <% } %>
+
+    <form action="/vuln/Upload_file/readfile" method="post">
+        <h3>--------------------</h3>
+        <!-- Input field for file selection -->
+        <label for="file">Select File to read:</label>
+        <input type="text" name="filename">
+        <button type="submit">Submit</button>
+    </form>
+
+ 
+
+    
+
+  
+    <% if (contentFile) { %>
+        <h3>Content of file</h3>
+        <p>File Name: <%= contentFile %></p>
+        <!-- Add more details if needed -->
+    <% } %>  
+    <!-- Back to Dashboard and Logout links -->
+    <br>
+    <h3>--------------------</h3>
+    <a href="/dashboard">Back to Dashboard</a>
+    <a href="/logout">Logout</a>
+</body>
+</html>

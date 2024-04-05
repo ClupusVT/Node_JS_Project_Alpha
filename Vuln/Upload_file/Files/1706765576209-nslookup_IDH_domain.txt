@@ -1,0 +1,87 @@
+C:\Users\nmanhthi>nslookup one-portal-us-east.poc.rbbnidhub.com
+Server:  tma-hk-9143.tma.asiapac.genband.com
+Address:  10.250.186.103
+
+Non-authoritative answer:
+Name:    one-portal-us-east.poc.rbbnidhub.com
+Addresses:  216.137.52.4
+          216.137.52.22
+          216.137.52.25
+          216.137.52.45
+
+
+C:\Users\nmanhthi>nslookup rbbnidhub.com
+Server:  tma-hk-9143.tma.asiapac.genband.com
+Address:  10.250.186.103
+
+Name:    rbbnidhub.com
+
+
+C:\Users\nmanhthi>nsloopkup one-portal-us-east.poc.rbbnidhub.com
+'nsloopkup' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\nmanhthi>nslookup one-portal-us-east.poc.rbbnidhub.com
+Server:  tma-hk-9143.tma.asiapac.genband.com
+Address:  10.250.186.103
+
+Non-authoritative answer:
+Name:    one-portal-us-east.poc.rbbnidhub.com
+Addresses:  216.137.52.4
+          216.137.52.22
+          216.137.52.25
+          216.137.52.45
+
+
+C:\Users\nmanhthi>nslookup one-portal-user-staging-pool-prod46.auth.us-east-2.amazoncognito.com
+Server:  tma-hk-9143.tma.asiapac.genband.com
+Address:  10.250.186.103
+
+Non-authoritative answer:
+Name:    one-portal-user-staging-pool-prod46.auth.us-east-2.amazoncognito.com
+Addresses:  2600:1f16:9b9:9600:6401:189c:e47c:f482
+          2600:1f16:9b9:9601:eae2:71af:8da0:8339
+          2600:1f16:9b9:9602:1d24:fe82:cec0:1fdd
+          3.20.102.26
+          3.128.102.53
+          18.221.240.220
+
+
+C:\Users\nmanhthi>nslookup prod046-api.poc.rbbnidhub.com
+Server:  tma-hk-9143.tma.asiapac.genband.com
+Address:  10.250.186.103
+
+DNS request timed out.
+    timeout was 2 seconds.
+Non-authoritative answer:
+Name:    prod046-api.poc.rbbnidhub.com
+Addresses:  3.12.46.208
+          3.136.96.21
+          3.139.157.60
+
+
+C:\Users\nmanhthi>nslookup prod046-mgmt.poc.rbbnidhub.com
+Server:  tma-hk-9143.tma.asiapac.genband.com
+Address:  10.250.186.103
+
+Non-authoritative answer:
+Name:    prod046-mgmt.poc.rbbnidhub.com
+Addresses:  18.164.174.25
+          18.164.174.27
+          18.164.174.71
+          18.164.174.77
+
+
+C:\Users\nmanhthi>nslookup prod046-mgmt.poc.rbbnidhub.com
+Server:  tma-hk-9143.tma.asiapac.genband.com
+Address:  10.250.186.103
+
+Non-authoritative answer:
+Name:    prod046-mgmt.poc.rbbnidhub.com
+Addresses:  18.164.174.77
+          18.164.174.25
+          18.164.174.27
+          18.164.174.71
+
+
+C:\Users\nmanhthi>

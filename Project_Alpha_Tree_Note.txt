@@ -1,0 +1,46 @@
+Location: OTT 
+/home/rbbnpentest/Desktop/Thi/Javascript/NodeJS/Project_Alpha
+Start db: systemctl start mysql
+Login to db: mysql -u rbbnpentest -p
+
+project-Alpha/
+|-- database/
+|   |-- dbQueries.js
+|-- helpers/
+|   |-- Feature
+|   |   |-- note-taking.html
+|   |   |-- note-taking.js
+|   |-- dompurifyHelper.js
+|   |-- checkFileExtension.js
+|-- public/
+|   |-- style.css
+|-- js/
+|   |-- session_validate.js
+|   |-- login_validate.js
+|   |-- Middleware.js
+|   |-- upload_validate.js
+|	|-- noteController.js
+|-- routes/
+|   |-- user.js
+|   |-- dashboard.js
+|-- static/
+|   |-- css/
+|   |-- images/
+|-- views/
+|   |-- profile.ejs
+|   |-- dashboard.ejs
+|   |-- login.html
+|   |-- note-taking.html
+|   |-- Upload_file.ejs
+|   |-- 404.ejs
+|-- Vuln/
+|   |-- CMDInjection
+|   |   |-- CMDIndex.html
+|   |-- XSS
+|   |   |-- XSS.html
+|   |   |-- verification.js
+|   |   |-- comment.js
+|   |-- Upload_file
+|   |   |-- Upload_file.js
+|   |   |-- Files/
+|-- index.js
