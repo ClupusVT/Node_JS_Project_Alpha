@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .welcome-message {
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .admin-links {
+            margin-top: 20px;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h2>User Dashboard</h2>
+    <div class="welcome-message">
+        Welcome, <%= username %>! Your role is: <%= userRole %>
+    </div>
+
+    <div class="button-container">
+        <button><a href="/user/profile">View Profile</a></button>
+        <button><a href="/user/settings">Settings</a></button>
+        <button><a href="/vuln/XSS">XSS Issue</a></button>
+        <button><a href="/vuln/CMDInjection">CMD Injection</a></button>
+        <button><a href="/vuln/Upload_file">Upload File Exploit</a></button>
+    </div>
+
+    <% if (userRole === 'Admin') { %>
+        <div class="admin-links">
+            <!-- Additional links for admin users -->
+            <a href="/user/admin/dashboard">Admin Dashboard</a>
+            <a href="/user/addUser">Add User Dashboard</a>
+        </div>
+    <% } %>
+
+    <a href="/logout">Logout</a>
+</body>
+</html>

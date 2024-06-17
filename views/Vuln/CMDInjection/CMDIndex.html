@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMD Injection</title>
+  <script src="../../../middlewares/IP_validation.js"></script>
+  <script>
+    async function performOperation() {
+      const host = document.getElementById('hostInput').value;
+      const operation = document.getElementById('operationSelect').value;
+      const responseContainer = document.getElementById('responseContainer');
+
+      try {
+        let url;
+        if (operation === 'L1') {          
+          url = `/vuln/CMDInjection/ping?host=${host}`;
+        } else if (operation === 'L2') {
+          if (!isValidIpAddress_level2(host)) {
+              responseContainer.innerHTML = 'Invalid IP address format.';
+              return;
+            }
+          url = `/vuln/CMDInjection/ping?host=${host}`;
+        } else {
+          responseContainer.innerHTML = 'Invalid operation selected.';
+          return;
+        }
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        responseContainer.innerHTML = JSON.stringify(data, null, 2);
+      } catch (error) {
+        responseContainer.innerHTML = 'Error: ' + error.message;
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Ping</h1>
+  <label for="hostInput">Enter Host:</label>
+  <input type="text" id="hostInput" placeholder="Enter host...">
+  <select id="operationSelect">
+    <option value="L1">Level 1</option>
+    <option value="L2">Level 2</option>
+  </select>
+  <button onclick="performOperation()">Ping</button>
+  <pre id="responseContainer"></pre>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Reader</title>
+  <script src="../../../middlewares/input_validate.js"></script>
+</head>
+<body>
+  <h1>File Reader inside system with Express</h1>  
+  <label for="fileInput_express">Select a file:</label>
+  <input type="text" id="fileInput_express" />
+  <select id="operationSelect_pathfilter">
+    <option value="L1">Level 1</option>
+    <option value="L2">Level 2</option>
+  </select>
+  <button onclick="readFile_express()">Read File</button> 
+  <button onclick="closeFile()">Close File</button>
+  <br />
+  <pre id="fileContent_express"></pre>
+
+  <script>
+    async function readFile_express() {
+    const fileInput = document.getElementById('fileInput_express');
+    const fileContentContainer = document.getElementById('fileContent_express');
+    const operation = document.getElementById('operationSelect_pathfilter').value;
+
+    const filePath = fileInput.value.trim();
+    let sanitizedFilePath;
+
+    switch (operation) {
+        case 'L1':
+            if (!filePath) {
+                fileContentContainer.textContent = 'Please enter a file path.';
+                return;
+            }
+            break;
+        case 'L2':
+            sanitizedFilePath = sanitizeInput_reading_file_l2(filePath);
+            console.log(sanitizedFilePath);
+            break;
+        default:
+            fileContentContainer.textContent = 'Invalid operation selected.';
+            return;
+    }
+    try {
+        const response = await fetch('/vuln/CMDInjection/readfile', {
+            method: 'POST',
+            body: operation === 'L1' ? filePath : sanitizedFilePath,
+        });
+
+        const fileContent = await response.text();
+        fileContentContainer.textContent = fileContent;
+    } catch (error) {
+        fileContentContainer.textContent = 'Error reading the file.';
+    }
+}
+
+    function closeFile() {
+      const fileContentContainer = document.getElementById('fileContent_express');
+      currentFileContent = ''; // Clear the content
+      fileContentContainer.textContent = currentFileContent;
+    }
+  </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../../middlewares/input_validate.js"></script>
+</head>
+<body>
+  <h1>File Reader by performing command to system</h1>  
+  <label for="fileInput_cmd">Select a file:</label>
+  <input type="text" id="fileInput_cmd" />
+  <select id="operationSelect_fileInput_cmd">
+    <option value="L1">Level 1</option>
+    <option value="L2">Level 2</option>
+    <option value="L3">Level 3</option>
+  </select>
+  <button onclick="readFile_cmd()">Read File</button> 
+  <button onclick="closeFile_cmd()">Close File</button>
+  <br />
+  <pre id="fileContent_cmd"></pre>
+
+  <script>
+    async function readFile_cmd() {
+    const fileInput_cmd = document.getElementById('fileInput_cmd');
+    const fileContentContainer_cmd = document.getElementById('fileContent_cmd');
+    const operation_cmd = document.getElementById('operationSelect_fileInput_cmd').value;
+
+    const filePath_cmd = fileInput_cmd.value.trim();
+    let sanitizedFilePath_cmd;
+ 
+    switch (operation_cmd) {
+        case 'L1':
+            if (!filePath_cmd) {
+                fileContentContainer_cmd.textContent = 'Please enter a file path.';               
+                return;
+            }
+            URL_request = '/vuln/CMDInjection/readfile_bycmd';
+            break;
+        case 'L2':
+            sanitizedFilePath_cmd = sanitizeInput_reading_file_l2(filePath_cmd);
+            console.log(sanitizedFilePath_cmd);
+            URL_request = '/vuln/CMDInjection/readfile_bycmd';
+            break;
+
+        case 'L3':
+            sanitizedFilePath_cmd = sanitizeInput_reading_file_l2(filePath_cmd);
+            console.log(sanitizedFilePath_cmd);
+            URL_request = '/vuln/CMDInjection/readfile_bycmd_L3';
+            break;
+        default:
+            fileContentContainer_cmd.textContent = 'Invalid operation selected.';
+            return;
+    }
+    try {
+            response = await fetch(URL_request, {
+            method: 'POST',
+            body: JSON.stringify({ filePath: operation_cmd === 'L1' ? filePath_cmd : sanitizedFilePath_cmd }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const fileContent_cmd = await response.text();
+        fileContentContainer_cmd.textContent = fileContent_cmd;
+    } catch (error) {
+        fileContentContainer_cmd.textContent = 'Error reading the file.';
+    }
+}
+
+    function closeFile_cmd() {
+      const fileContentContainer = document.getElementById('fileContent_cmd');
+      currentFileContent = ''; // Clear the content
+      fileContentContainer.textContent = currentFileContent;
+    }
+  </script>
+</body>
+</html>
+
+
